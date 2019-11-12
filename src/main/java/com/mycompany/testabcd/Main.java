@@ -24,7 +24,7 @@ public class Main {
         // create new todo
         em.getTransaction().begin();
         Todo todo = new Todo();
-        todo.setSummary("This is a test");
+        todo.setSummary("This is a dest");
         todo.setDescription("This is a test");
         em.persist(todo);
         em.getTransaction().commit();

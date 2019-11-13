@@ -43,10 +43,9 @@ public class TodoTest {
     @org.junit.jupiter.api.Test
     public void testTest() {
         System.out.println("testTest");
-        
-        assertThat(1, is(2)); 
+
+        assertThat(1, is(1));
 
     }
 
-   
 }

@@ -27,4 +27,12 @@ public class Stellplatz {
 
     private String name;
 
+    Stellplatz(String name) {
+        this.name = name;
+    }
+
+    public Stellplatz() {
+
+    }
+
 }

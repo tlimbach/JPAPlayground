@@ -44,7 +44,15 @@ public class EntityHelper {
     public static void clearTable(String tableName) {
         EntityManager entitymanager = EntityHelper.getEntitymanager();
         entitymanager.getTransaction().begin();
-        entitymanager.createQuery("DELETE FROM " + tableName).executeUpdate();
+        entitymanager.createNativeQuery("DELETE FROM " + tableName).executeUpdate();
         entitymanager.getTransaction().commit();
+    }
+
+    public static Object update(Class entityClass, Long pKey) {
+        EntityManager entitymanager = getEntitymanager();
+        entitymanager.getTransaction().begin();
+        Object find = entitymanager.find(entityClass, pKey);
+        entitymanager.getTransaction().commit();
+        return find;
     }
 }

@@ -55,6 +55,22 @@ public class StellplatzTest {
 
     }
 
+    @Test
+    public void testChangeDetatchedStellplatzName() {
+        Stellplatz sp = createTestStellplatz();
+        assertTrue(sp.getId() > 0);
+        assertThat(sp.getName(), is("ElCheffe"));
+
+        Long id = sp.getId();
+
+        Stellplatz dSp = new Stellplatz();
+        dSp.setId(id);
+
+        dSp.setName("Hannibal");
+
+        EntityHelper.merge(dSp);
+    }
+
     private static Stellplatz createTestStellplatz() {
 
         EntityHelper.clearTable("Stellplatz");

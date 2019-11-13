@@ -233,7 +233,7 @@ public class ParkplatzgruppeTest {
     }
 
     private Parkplatzgruppe createParkplatzGruppe() {
-
+        EntityHelper.clearTable("Stellplatz");
         EntityHelper.clearTable("Parkplatzgruppe");
 
         Parkplatzgruppe grp = new Parkplatzgruppe();
@@ -244,6 +244,7 @@ public class ParkplatzgruppeTest {
     }
 
     private Parkplatzgruppe createParkplatzGruppe(String name) {
+        EntityHelper.clearTable("Stellplatz");
         EntityHelper.clearTable("Parkplatzgruppe");
 
         Parkplatzgruppe grp = new Parkplatzgruppe();

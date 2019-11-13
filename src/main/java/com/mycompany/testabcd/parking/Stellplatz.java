@@ -20,19 +20,23 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Stellplatz {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     private String name;
 
-    Stellplatz(String name) {
+    // für JPA
+    private Parkplatzgruppe parkplatzgruppe;
+    
+    Stellplatz(Parkplatzgruppe grp, String name) {
         this.name = name;
+        setParkplatzgruppe(grp);
     }
-
+    
     public Stellplatz() {
-
+        
     }
-
+    
 }

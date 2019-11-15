@@ -6,6 +6,8 @@
         <class>com.mycompany.testabcd.parking.Parkplatzgruppe</class>
         <class>com.mycompany.testabcd.parking.Stellplatz</class>
         <class>com.mycompany.testabcd.parking.Vermietung</class>
+        <class>com.mycompany.testabcd.authorbooks.Author</class>
+        <class>com.mycompany.testabcd.authorbooks.Book</class>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>
             <property name="javax.persistence.jdbc.user" value="app"/>

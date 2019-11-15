@@ -30,6 +30,7 @@ public class EntityHelper {
         entitymanager.getTransaction().begin();
         entitymanager.persist(object);
         entitymanager.getTransaction().commit();
+        entitymanager.close();
         return object;
     }
 
@@ -38,6 +39,7 @@ public class EntityHelper {
         entitymanager.getTransaction().begin();
         entitymanager.merge(object);
         entitymanager.getTransaction().commit();
+        entitymanager.close();
         return object;
     }
 
@@ -46,13 +48,28 @@ public class EntityHelper {
         entitymanager.getTransaction().begin();
         entitymanager.createNativeQuery("DELETE FROM " + tableName).executeUpdate();
         entitymanager.getTransaction().commit();
+        entitymanager.close();
     }
 
     public static Object update(Class entityClass, Long pKey) {
         EntityManager entitymanager = getEntitymanager();
         entitymanager.getTransaction().begin();
-        Object find = entitymanager.find(entityClass, pKey);
+        Object entity = entitymanager.find(entityClass, pKey);
         entitymanager.getTransaction().commit();
-        return find;
+        entitymanager.close();
+        return entity;
+    }
+
+    public static void clearCache() {
+        getEntitymanager().getEntityManagerFactory().getCache().evictAll();
+    }
+
+    public static void delete(Class entityClass, Long pKey) {
+        EntityManager entitymanager = getEntitymanager();
+        entitymanager.getTransaction().begin();
+        Object entity = entitymanager.find(entityClass, pKey);
+        entitymanager.remove(entity);
+        entitymanager.getTransaction().commit();
+        entitymanager.close();
     }
 }

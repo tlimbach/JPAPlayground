@@ -51,7 +51,7 @@ public class EntityHelper {
         entitymanager.close();
     }
 
-    public static Object update(Class entityClass, Long pKey) {
+    public static Object reload(Class entityClass, Long pKey) {
         EntityManager entitymanager = getEntitymanager();
         entitymanager.getTransaction().begin();
         Object entity = entitymanager.find(entityClass, pKey);

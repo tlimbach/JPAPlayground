@@ -68,7 +68,7 @@ public class AuthorBookTest {
         EntityHelper.merge(author);
 
         //   assertThat(author.getBooks(), IsEmptyCollection.empty());
-        author = (Author) EntityHelper.update(author.getClass(), author.getId());
+        author = (Author) EntityHelper.reload(author.getClass(), author.getId());
 
         assertThat(author.getBooks().size(), is(1));
 
@@ -94,7 +94,7 @@ public class AuthorBookTest {
         EntityHelper.merge(author);
 
         //EntityHelper.clearCache();
-        Author authorFromDB = (Author) EntityHelper.update(Author.class, authorId);
+        Author authorFromDB = (Author) EntityHelper.reload(Author.class, authorId);
 
         assertThat(authorFromDB.getBooks().size(), is(10));
     }
@@ -119,7 +119,7 @@ public class AuthorBookTest {
         EntityHelper.merge(author);
 
         //EntityHelper.clearCache();
-        Author authorFromDB = (Author) EntityHelper.update(Author.class, authorId);
+        Author authorFromDB = (Author) EntityHelper.reload(Author.class, authorId);
 
         assertThat(authorFromDB.getBooks().size(), is(10));
 
@@ -139,7 +139,7 @@ public class AuthorBookTest {
         assertThat(booksFromTheAutor.size(), is(10));
 
         // getAuthorName for Books named "book4"
-        TypedQuery<Author> queryAuthor = em.createQuery("select a from Author a INNER JOIN a.books b where b.name LIKE '%book4%'", Author.class);
+        TypedQuery<Author> queryAuthor = em.createQuery("select a from Author a JOIN a.books b where b.name LIKE '%book4%'", Author.class);
         Author singleResult = queryAuthor.getSingleResult();
 
         assertThat(singleResult.getName(), is("a1"));

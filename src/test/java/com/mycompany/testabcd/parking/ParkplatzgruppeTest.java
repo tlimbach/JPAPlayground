@@ -92,7 +92,7 @@ public class ParkplatzgruppeTest {
 
         grp.setName("Willi");
 
-        grp = (Parkplatzgruppe) EntityHelper.update(grp.getClass(), grp.getId());
+        grp = (Parkplatzgruppe) EntityHelper.reload(grp.getClass(), grp.getId());
         assertThat(grp.getName(), is("johann"));
 
     }
@@ -122,7 +122,7 @@ public class ParkplatzgruppeTest {
 
         grp.setName("Willi");
 
-        grp = (Parkplatzgruppe) EntityHelper.update(grp.getClass(), grp.getId());
+        grp = (Parkplatzgruppe) EntityHelper.reload(grp.getClass(), grp.getId());
         assertThat(grp.getName(), is("johann"));
 
         assertThat(grp.getStellplaetze().size(), is(2));
@@ -131,7 +131,7 @@ public class ParkplatzgruppeTest {
         grp.getStellplaetze().add(new Stellplatz(grp, "Johanns Stellplatz"));
 
         EntityHelper.merge(grp);
-        grp = (Parkplatzgruppe) EntityHelper.update(grp.getClass(), grp.getId());
+        grp = (Parkplatzgruppe) EntityHelper.reload(grp.getClass(), grp.getId());
         assertThat(grp.getName(), is("johann"));
 
         assertThat(grp.getStellplaetze().size(), is(3));
@@ -139,7 +139,7 @@ public class ParkplatzgruppeTest {
         grp.getStellplaetze().add(new Stellplatz(grp, "Johanns Stellplatz2"));
 
         EntityHelper.merge(grp);
-        grp = (Parkplatzgruppe) EntityHelper.update(grp.getClass(), grp.getId());
+        grp = (Parkplatzgruppe) EntityHelper.reload(grp.getClass(), grp.getId());
         assertThat(grp.getName(), is("johann"));
 
         assertThat(grp.getStellplaetze().size(), is(4));
@@ -148,11 +148,11 @@ public class ParkplatzgruppeTest {
         Parkplatzgruppe dto = new Parkplatzgruppe();
         dto.setId(grp.getId());
 
-        Parkplatzgruppe grpFromDto = (Parkplatzgruppe) EntityHelper.update(dto.getClass(), dto.getId());
+        Parkplatzgruppe grpFromDto = (Parkplatzgruppe) EntityHelper.reload(dto.getClass(), dto.getId());
         grpFromDto.getStellplaetze().add(new Stellplatz(grpFromDto, "Johanns Stellplatz3"));
 
         EntityHelper.merge(grpFromDto);
-        grpFromDto = (Parkplatzgruppe) EntityHelper.update(grpFromDto.getClass(), grpFromDto.getId());
+        grpFromDto = (Parkplatzgruppe) EntityHelper.reload(grpFromDto.getClass(), grpFromDto.getId());
         assertThat(grpFromDto.getName(), is("johann"));
 
         assertThat(grpFromDto.getStellplaetze().size(), is(5));
@@ -164,7 +164,7 @@ public class ParkplatzgruppeTest {
         dto.getStellplaetze().add(new Stellplatz(dto, "Johanns Stellplatz4"));
 
         EntityHelper.merge(dto);
-        grpFromDto = (Parkplatzgruppe) EntityHelper.update(dto.getClass(), dto.getId());
+        grpFromDto = (Parkplatzgruppe) EntityHelper.reload(dto.getClass(), dto.getId());
 
         // Das mehr oder wenier leere dto Object hat das gefüllte Object per merge überschrieben
         assertThat(grpFromDto.getName(), Matchers.nullValue());
@@ -172,13 +172,13 @@ public class ParkplatzgruppeTest {
 
         grpFromDto.setName("zweite Parkplatzgruppe");
 
-        grpFromDto = (Parkplatzgruppe) EntityHelper.update(grpFromDto.getClass(), grpFromDto.getId());
+        grpFromDto = (Parkplatzgruppe) EntityHelper.reload(grpFromDto.getClass(), grpFromDto.getId());
 
         assertThat(grpFromDto.getName(), Matchers.nullValue());
 
         grpFromDto.setName("zweite Parkplatzgruppe");
         EntityHelper.merge(grpFromDto);
-        grpFromDto = (Parkplatzgruppe) EntityHelper.update(grpFromDto.getClass(), grpFromDto.getId());
+        grpFromDto = (Parkplatzgruppe) EntityHelper.reload(grpFromDto.getClass(), grpFromDto.getId());
 
         assertThat(grpFromDto.getName(), is("zweite Parkplatzgruppe"));
 
